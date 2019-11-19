@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "stores/*": ["common-mobile/stores/*"],
+      "providers/*": ["common-mobile/providers/*"],
+      "components/*": ["app/components/*"],
+    }
+  }
+}

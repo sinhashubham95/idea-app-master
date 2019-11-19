@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "29099565510",
+    "firebase_url": "https://wazoku-app.firebaseio.com",
+    "project_id": "wazoku-app",
+    "storage_bucket": "wazoku-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:29099565510:android:0b0fef6247cbd2ed7f12c7",
+        "android_client_info": {
+          "package_name": "com.solidstategroup.wazoku"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "29099565510-29i9vobg8kdk8qkdusgo0gtjqleckh0f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDPuW7MQw35XCxKX055IuG8r1_N6X-M6tg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "29099565510-29i9vobg8kdk8qkdusgo0gtjqleckh0f.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "29099565510-uspar5knm0gei68a47oarb0h6f5r2vvh.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.solidstategroup.wazokuideaapp",
+                "app_store_id": "1459373832"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

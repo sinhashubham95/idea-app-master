@@ -1,0 +1,15 @@
+global.AccountStore = require('../../common-mobile/stores/account-store');
+global.DomainStore = require('../../common-mobile/stores/domain-store');
+global.IdeasStore = require('../../common-mobile/stores/ideas-store');
+global.MyIdeasStore = require('../../common-mobile/stores/my-ideas-store');
+global.NetworkStore = require('../../common-mobile/stores/network-store');
+global.ChallengeFormsStore = require('../../common-mobile/stores/challenge-forms-store');
+global.ChallengesStore = require('../../common-mobile/stores/challenges-store');
+global.IdeaCommentsStore = require('../../common-mobile/stores/idea-comments-store');
+global.UsersStore = require('../../common-mobile/stores/users-store');
+global.GroupsStore = require('../../common-mobile/stores/groups-store');
+global.NotificationsStore = require('../../common-mobile/stores/notifications-store');
+global.TasksStore = require('../../common-mobile/stores/tasks-store');
+global.DeviceStateStore = require('../../common-mobile/stores/device-state-store');
+global.OfflineIdeasStore = require('../../common-mobile/stores/offline-ideas-store');
+global.OfflineActionsStore = require('../../common-mobile/stores/offline-actions-store'); // MUST be required after NetworkStore

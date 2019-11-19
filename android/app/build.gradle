@@ -1,0 +1,188 @@
+apply plugin: "com.android.application"
+
+import com.android.build.OutputFile
+
+
+project.ext.react = [
+    entryFile: "index.js"
+]
+
+apply from: "../../node_modules/react-native/react.gradle"
+
+/**
+ * Set this to true to create two separate APKs instead of one:
+ *   - An APK that only works on ARM devices
+ *   - An APK that only works on x86 devices
+ * The advantage is the size of the APK is reduced by about 4MB.
+ * Upload all the APKs to the Play Store and people will download
+ * the correct one based on the CPU architecture of their device.
+ */
+def enableSeparateBuildPerCPUArchitecture = true
+
+/**
+ * Run Proguard to shrink the Java bytecode in release builds.
+ */
+def enableProguardInReleaseBuilds = true
+
+
+/**
+ * REACT_NATIVE_FABRIC
+ */
+ buildscript {
+   repositories {
+     maven { url 'https://maven.fabric.io/public' }
+   }
+   dependencies {
+     // The Fabric Gradle plugin uses an open ended version to react
+     // quickly to Android tooling updates
+     classpath 'io.fabric.tools:gradle:1.+'
+   }
+ }
+
+ repositories {
+   maven { url 'https://maven.fabric.io/public' }
+ }
+ /**
+  * END OF REACT_NATIVE_FABRIC.
+  */
+
+
+android {
+    compileSdkVersion rootProject.ext.compileSdkVersion
+
+    defaultConfig {
+        applicationId "com.solidstategroup.wazoku"
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        missingDimensionStrategy "RNN.reactNativeVersion", "reactNative57_5"
+        versionCode 84
+        versionName "2.0"
+        multiDexEnabled true
+        renderscriptSupportModeEnabled true
+        vectorDrawables.useSupportLibrary = true
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    splits {
+        abi {
+            reset()
+            enable enableSeparateBuildPerCPUArchitecture
+            universalApk false  // If true, also generate a universal APK
+            include "armeabi-v7a", "x86", "arm64-v8a", "x86-64"
+        }
+    }
+    signingConfigs {
+        prodRelease {
+           storeFile file('wazoku-release-key.keystore')
+           storePassword 'axvw2mnJgJHRQ8NW'
+           keyAlias 'wazoku'
+           keyPassword 'axvw2mnJgJHRQ8NW'
+        }
+        qaRelease {
+           storeFile file('wazoku-qa-release-key.keystore')
+           storePassword '8pQmypP7bTesXUXU'
+           keyAlias 'wazoku-qa'
+           keyPassword '8pQmypP7bTesXUXU'
+        }
+    }
+    flavorDimensions "default"
+    productFlavors {
+        qa {
+            applicationIdSuffix ".test"
+        }
+        prod {
+        }
+    }
+    buildTypes {
+        release {
+            productFlavors.prod.signingConfig signingConfigs.prodRelease
+            productFlavors.qa.signingConfig signingConfigs.qaRelease
+
+            minifyEnabled enableProguardInReleaseBuilds
+            shrinkResources enableProguardInReleaseBuilds
+            proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
+        }
+    }
+    // applicationVariants are e.g. debug, release
+    applicationVariants.all { variant ->
+        variant.outputs.each { output ->
+            // For each separate APK per architecture, set a unique version code as described here:
+            // http://tools.android.com/tech-docs/new-build-system/user-guide/apk-splits
+            def versionCodes = ["armeabi-v7a":1, "x86":2, "arm64-v8a": 3, "x86-64": 4]
+            def abi = output.getFilter(OutputFile.ABI)
+            if (abi != null) {  // null for the universal-debug, universal-release variants
+                output.versionCodeOverride =
+                        versionCodes.get(abi) * 1048576 + defaultConfig.versionCode
+            }
+        }
+    }
+    dexOptions {
+        incremental true
+        javaMaxHeapSize "4g"
+    }
+}
+
+dependencies {
+    implementation project(':react-native-localization')
+    implementation project(':react-native-keychain')
+    implementation project(':react-native-pbkdf2')
+    implementation project(':react-native-text-size')
+    implementation project(':react-native-image-crop-picker')
+    implementation project(':react-native-threads')
+    implementation project(':react-native-sqlite-storage')
+    implementation('com.github.dryganets:sqlite-adapter-cipher:0.0.1') {
+        exclude group: 'sqlite-adapter', module: 'sqlite-adapter'
+    }
+    implementation project(':react-native-photo-editor')
+    implementation project(':react-native-image-picker')
+    implementation project(':react-native-fast-image')
+    implementation project(':react-native-file-viewer')
+    implementation project(':react-native-android-keyboard-adjust')
+    implementation project(':react-native-fs')
+    implementation project(':react-native-document-picker')
+    implementation project(':react-native-webview')
+    implementation project(':@react-native-community_netinfo')
+    implementation project(':@react-native-community_async-storage')
+    implementation project(':lottie-react-native')
+    implementation project(':react-native-bottomsheet')
+    implementation project(':react-native-branch')
+    implementation('com.crashlytics.sdk.android:crashlytics:2.9.1@aar') {
+            transitive = true;
+    }
+    implementation project(':react-native-device-info')
+    implementation project(':react-native-fabric')
+    implementation project(':react-native-facebook-login')
+    implementation project(':react-native-firebase')
+    implementation project(':react-native-interactable')
+    implementation project(':react-native-linear-gradient')
+    implementation project(':react-native-navigation')
+    implementation project(':react-native-svg')
+    implementation project(':react-native-vector-icons')
+    implementation project(':react-native-view-overflow')
+
+    implementation "io.branch.sdk.android:library:3.0.4"
+    implementation "com.android.support:appcompat-v7:${rootProject.ext.supportLibVersion}"
+    implementation "com.facebook.react:react-native:+"  // From node_modules
+    implementation(project(":react-native-google-signin"))
+
+    implementation "com.google.android.gms:play-services-base:16.0.1"
+    implementation "com.google.firebase:firebase-core:16.0.6"
+    implementation "com.google.firebase:firebase-messaging:17.3.4"
+    implementation 'me.leolin:ShortcutBadger:1.1.21@aar'
+
+    implementation "com.android.support:design:${rootProject.ext.supportLibVersion}"
+
+}
+
+// Run this once to be able to run the application with BUCK
+// puts all implementation dependencies into folder libs for BUCK to use
+task copyDownloadableDepsToLibs(type: Copy) {
+    from configurations.compile
+    into 'libs'
+}
+
+
+apply plugin: 'io.fabric' //REACT_NATIVE_FABRIC
+apply plugin: 'com.google.gms.google-services' //REACT_NATIVE_FIREBASE

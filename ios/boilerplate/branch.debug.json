@@ -1,0 +1,8 @@
+{
+  "debugMode": true,
+  "liveKey": "key_live_jpKg3w3qehDgh124DO4b7mgpvsed30sP",
+  "testKey": "key_test_jnSc2u6tgbqbe262EQYD7mecDqfl2Yy0",
+  "useTestInstance": false,
+  "delayInitToCheckForSearchAds": true,
+  "appleSearchAdsDebugMode": true
+}
